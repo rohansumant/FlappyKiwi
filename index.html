@@ -1,0 +1,62 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Game - Flappy Kiwi</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.1.1/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var score = 0;
+var gameOver = false;
+var scoreText;
+
+var game = new Phaser.Game(config);
+var kiwi, cnt = 0;
+
+function preload() {
+    this.load.image('pipe', 'assets/pipe.png');
+    this.load.image('kiwi', 'assets/kiwi.png');
+}
+
+function create() {
+    kiwi = this.physics.add.sprite(200,200,'kiwi');
+    kiwi.setScale(3,3);
+}
+
+function update() {
+    this.physics.world.bounds.x += 40;
+    if(this.input.activePointer.isDown) {
+        kiwi.setVelocityY(-200);
+    }
+}
+
+</script>
+
+</body>
+</html>
